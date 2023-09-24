@@ -1,8 +1,8 @@
 const scene: Scene = new Scene()
-// const cube: Cube = new Cube(new Vector(0, 0, 5))
+const cube: Cube = new Cube(new Vector(0, 0, 5))
 // const rectangle: RectangularPrism = new RectangularPrism(new Vector(2, 0, 5), 2, 1, 1)
 // const rectangle2: RectangularPrism = new RectangularPrism(new Vector(5, 0, 5), 4, 1, 1)
-const sphere: UVSphere = new UVSphere(new Vector(2, 0, 5), 1, 15, 30)
+const sphere: Icosphere = new Icosphere(new Vector(2, 0, 5), 2, 2)
 
 
 let keyMap: Map<string, boolean> = new Map<string, boolean>()
@@ -13,11 +13,12 @@ function checkKey(k: string): boolean {
   } return false
 }
 
-// scene.addObject(cube)
+scene.addObject(cube)
 // scene.addObject(rectangle)
 // scene.addObject(rectangle2)
 scene.addObject(sphere)
 scene.addLight(new Light())
+scene.addLight(new Light(new Vector(), new Vector(0,0,1)))
 
 function draw(t: number): void {
   scene.bg()
@@ -34,7 +35,6 @@ function draw(t: number): void {
   if (checkKey('d')) scene.camera.translate(scene.camera.orientation.right.scale(0.05))
   if (checkKey('q')) scene.camera.translate(scene.camera.orientation.up.scale(-0.05))
   if (checkKey('e')) scene.camera.translate(scene.camera.orientation.up.scale(0.05))
-  // if (checkKey('f')) scene.camera.lookAt(cube)
 
   scene.render()
 
