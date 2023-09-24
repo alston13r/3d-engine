@@ -138,4 +138,8 @@ class Triangle {
   getMidpointX = (): number => this.getMidpoint().x
   getMidpointY = (): number => this.getMidpoint().y
   getMidpointZ = (): number => this.getMidpoint().z
+
+  static FromArr(i: number, j: number, k: number, arr: Vector[]): Triangle {
+    return new Triangle(arr[i].copy(), arr[j].copy(), arr[k].copy())
+  }
 }
