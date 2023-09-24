@@ -205,4 +205,12 @@ class Vector {
     let lineSI = lineSE.scale(t)
     return start.add(lineSI)
   }
+
+  static GetMidpoint(a: Vector, b: Vector): Vector {
+    return a.add(b).div(2)
+  }
+
+  getMidpoint(v: Vector): Vector {
+    return Vector.GetMidpoint(this, v)
+  }
 }
