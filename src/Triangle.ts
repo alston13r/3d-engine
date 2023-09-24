@@ -1,11 +1,38 @@
-class Triangle {
+interface Triangle {
   p: [Vector, Vector, Vector]
   c: string
+}
 
+class Triangle {
   constructor(p1: Vector, p2: Vector, p3: Vector, c: string = '#fff') {
     this.p = [p1, p2, p3]
     this.c = c
   }
+
+  get p1(): Vector {return this.p[0]}
+  get p2(): Vector {return this.p[1]}
+  get p3(): Vector {return this.p[2]}
+  get x1(): number {return this.p1.x}
+  get y1(): number {return this.p1.y}
+  get z1(): number {return this.p1.z}
+  get x2(): number {return this.p2.x}
+  get y2(): number {return this.p2.y}
+  get z2(): number {return this.p2.z}
+  get x3(): number {return this.p3.x}
+  get y3(): number {return this.p3.y}
+  get z3(): number {return this.p3.z}
+  set p1(p: Vector) {this.p[0] = p}
+  set p2(p: Vector) {this.p[1] = p}
+  set p3(p: Vector) {this.p[2] = p}
+  set x1(x: number) {this.x1 = x}
+  set y1(y: number) {this.y1 = y}
+  set z1(z: number) {this.z1 = z}
+  set x2(x: number) {this.x2 = x}
+  set y2(y: number) {this.y2 = y}
+  set z2(z: number) {this.z2 = z}
+  set x3(x: number) {this.x3 = x}
+  set y3(y: number) {this.y3 = y}
+  set z3(z: number) {this.z3 = z}
 
   static Copy(t: Triangle): Triangle {
     return new Triangle(t.p[0].copy(), t.p[1].copy(), t.p[2].copy(), t.c)
