@@ -117,6 +117,9 @@ class Triangle {
         }
         return new Vector(x / 3, y / 3, z / 3);
     }
+    static FromArr(i, j, k, arr) {
+        return new Triangle(arr[i].copy(), arr[j].copy(), arr[k].copy());
+    }
 }
 Triangle.GetMidpointX = (t) => Triangle.GetMidpoint(t).x;
 Triangle.GetMidpointY = (t) => Triangle.GetMidpoint(t).y;

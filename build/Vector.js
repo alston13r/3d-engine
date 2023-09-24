@@ -169,6 +169,12 @@ class Vector {
         let lineSI = lineSE.scale(t);
         return start.add(lineSI);
     }
+    static GetMidpoint(a, b) {
+        return a.add(b).div(2);
+    }
+    getMidpoint(v) {
+        return Vector.GetMidpoint(this, v);
+    }
 }
 Vector.iHat = new Vector(1);
 Vector.jHat = new Vector(0, 1);

@@ -1,9 +1,9 @@
 "use strict";
 const scene = new Scene();
-// const cube: Cube = new Cube(new Vector(0, 0, 5))
+const cube = new Cube(new Vector(0, 0, 5));
 // const rectangle: RectangularPrism = new RectangularPrism(new Vector(2, 0, 5), 2, 1, 1)
 // const rectangle2: RectangularPrism = new RectangularPrism(new Vector(5, 0, 5), 4, 1, 1)
-const sphere = new UVSphere(new Vector(2, 0, 5), 1, 15, 30);
+const sphere = new Icosphere(new Vector(2, 0, 5), 2, 2);
 let keyMap = new Map();
 function checkKey(k) {
     if (keyMap.has(k)) {
@@ -11,11 +11,12 @@ function checkKey(k) {
     }
     return false;
 }
-// scene.addObject(cube)
+scene.addObject(cube);
 // scene.addObject(rectangle)
 // scene.addObject(rectangle2)
 scene.addObject(sphere);
 scene.addLight(new Light());
+scene.addLight(new Light(new Vector(), new Vector(0, 0, 1)));
 function draw(t) {
     scene.bg();
     if (checkKey('i'))
@@ -42,7 +43,6 @@ function draw(t) {
         scene.camera.translate(scene.camera.orientation.up.scale(-0.05));
     if (checkKey('e'))
         scene.camera.translate(scene.camera.orientation.up.scale(0.05));
-    // if (checkKey('f')) scene.camera.lookAt(cube)
     scene.render();
     window.requestAnimationFrame(draw);
 }
