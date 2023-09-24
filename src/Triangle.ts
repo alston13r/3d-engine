@@ -12,6 +12,7 @@ class Triangle {
   get p1(): Vector {return this.p[0]}
   get p2(): Vector {return this.p[1]}
   get p3(): Vector {return this.p[2]}
+
   get x1(): number {return this.p1.x}
   get y1(): number {return this.p1.y}
   get z1(): number {return this.p1.z}
@@ -21,9 +22,11 @@ class Triangle {
   get x3(): number {return this.p3.x}
   get y3(): number {return this.p3.y}
   get z3(): number {return this.p3.z}
+
   set p1(p: Vector) {this.p[0] = p}
   set p2(p: Vector) {this.p[1] = p}
   set p3(p: Vector) {this.p[2] = p}
+  
   set x1(x: number) {this.x1 = x}
   set y1(y: number) {this.y1 = y}
   set z1(z: number) {this.z1 = z}
