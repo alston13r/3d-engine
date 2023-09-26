@@ -56,30 +56,6 @@ class Matrix {
         })
       }
     }
-
-
-    // if (a instanceof Matrix) {
-    //   if (b instanceof Matrix) {
-    //     return Matrix.Map(new Matrix(a.r, b.c), (e,i,j) => {
-    //       let s = 0
-    //       for (let k=0; k<a.c; k++) s += a.m[i][k] * b.m[k][j]
-    //       return s
-    //     })
-    //   } else {
-    //     return Matrix.Dot(b, a)
-    //   }
-    // } else {
-    //   if (b instanceof Matrix) {
-    //     let n: Matrix = new Matrix(1, 4)
-    //     n.m[0][0] = a.x
-    //     n.m[0][1] = a.y
-    //     n.m[0][2] = a.z
-    //     n.m[0][3] = a.w
-    //     return Matrix.Dot(n, b).toVector()
-    //   } else {
-    //     return Vector.Dot(a, b)
-    //   }
-    // }
   }
 
   dot(a: Vector): Vector
