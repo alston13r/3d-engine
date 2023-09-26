@@ -1,11 +1,20 @@
 "use strict";
-class Vector {
+class Vector extends Matrix {
     constructor(x = 0, y = 0, z = 0, w = 1) {
+        super(1, 4);
         this.x = x;
         this.y = y;
         this.z = z;
         this.w = w;
     }
+    get x() { return this.m[0][0]; }
+    get y() { return this.m[0][1]; }
+    get z() { return this.m[0][2]; }
+    get w() { return this.m[0][3]; }
+    set x(x) { this.m[0][0] = x; }
+    set y(y) { this.m[0][1] = y; }
+    set z(z) { this.m[0][2] = z; }
+    set w(w) { this.m[0][3] = w; }
     static Copy(v) {
         return new Vector(v.x, v.y, v.z, v.w);
     }
@@ -54,28 +63,10 @@ class Vector {
         return Vector.Scale(this.copy(), a);
     }
     static Dot(a, b) {
-        if (a instanceof Vector) {
-            if (b instanceof Vector) {
-                return a.x * b.x + a.y * b.y + a.z * b.z;
-            }
-            else {
-                return Matrix.Dot(a, b);
-            }
-        }
-        else {
-            if (b instanceof Vector) {
-                return Matrix.Dot(b, a);
-            }
-            else {
-                return Matrix.Dot(a, b);
-            }
-        }
+        return Matrix.Dot(a, b);
     }
     dot(a) {
-        if (a instanceof Vector)
-            return Vector.Dot(this, a);
-        else
-            return Matrix.Dot(this, a);
+        return Vector.Dot(this, a);
     }
     static Div(a, b) {
         a.x /= b;
@@ -174,6 +165,12 @@ class Vector {
     }
     getMidpoint(v) {
         return Vector.GetMidpoint(this, v);
+    }
+    static ToMatrix(v) {
+        return Matrix.FromArr([v.x, v.y, v.z, v.w]);
+    }
+    toMatrix() {
+        return Vector.ToMatrix(this);
     }
 }
 Vector.iHat = new Vector(1);

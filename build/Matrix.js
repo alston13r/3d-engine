@@ -35,8 +35,19 @@ class Matrix {
         return _a.Map(this.copy(), fn);
     }
     static Dot(a, b) {
-        if (a instanceof _a) {
-            if (b instanceof _a) {
+        if (a instanceof Vector) {
+            if (b instanceof Vector) {
+                return a.x * b.x + a.y * b.y + a.z * b.z;
+            }
+            else {
+                return a.toMatrix().dot(b).toVector();
+            }
+        }
+        else {
+            if (b instanceof Vector) {
+                return b.toMatrix().dot(a).toVector();
+            }
+            else {
                 return _a.Map(new _a(a.r, b.c), (e, i, j) => {
                     let s = 0;
                     for (let k = 0; k < a.c; k++)
@@ -44,29 +55,34 @@ class Matrix {
                     return s;
                 });
             }
-            else {
-                return _a.Dot(b, a);
-            }
         }
-        else {
-            if (b instanceof _a) {
-                let n = new _a(1, 4);
-                n.m[0][0] = a.x;
-                n.m[0][1] = a.y;
-                n.m[0][2] = a.z;
-                n.m[0][3] = a.w;
-                return _a.Dot(n, b).toVector();
-            }
-            else {
-                return Vector.Dot(a, b);
-            }
-        }
+        // if (a instanceof Matrix) {
+        //   if (b instanceof Matrix) {
+        //     return Matrix.Map(new Matrix(a.r, b.c), (e,i,j) => {
+        //       let s = 0
+        //       for (let k=0; k<a.c; k++) s += a.m[i][k] * b.m[k][j]
+        //       return s
+        //     })
+        //   } else {
+        //     return Matrix.Dot(b, a)
+        //   }
+        // } else {
+        //   if (b instanceof Matrix) {
+        //     let n: Matrix = new Matrix(1, 4)
+        //     n.m[0][0] = a.x
+        //     n.m[0][1] = a.y
+        //     n.m[0][2] = a.z
+        //     n.m[0][3] = a.w
+        //     return Matrix.Dot(n, b).toVector()
+        //   } else {
+        //     return Vector.Dot(a, b)
+        //   }
+        // }
     }
     dot(a) {
-        if (a instanceof _a)
-            return _a.Dot(this, a);
-        else
-            return _a.Dot(a, this);
+        if (a instanceof Vector)
+            return _a.Dot(a, this).toVector();
+        return _a.Dot(this, a);
     }
     static ToVector(m) {
         return new Vector(m.m[0][0], m.m[0][1], m.m[0][2], m.m[0][3]);
