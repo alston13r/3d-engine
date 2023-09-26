@@ -4,7 +4,6 @@ const cube: Cube = new Cube(new Vector(0, 0, 5))
 // const rectangle2: RectangularPrism = new RectangularPrism(new Vector(5, 0, 5), 4, 1, 1)
 const sphere: Icosphere = new Icosphere(new Vector(2, 0, 5), 2, 2)
 
-
 let keyMap: Map<string, boolean> = new Map<string, boolean>()
 
 function checkKey(k: string): boolean {
