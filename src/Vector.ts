@@ -1,15 +1,21 @@
-class Vector {
-  x: number
-  y: number
-  z: number
-  w: number
-
+class Vector extends Matrix {
   constructor(x: number = 0, y: number = 0, z: number = 0, w: number = 1) {
+    super(1, 4)
     this.x = x
     this.y = y
     this.z = z
     this.w = w
   }
+
+  get x(): number {return this.m[0][0]}
+  get y(): number {return this.m[0][1]}
+  get z(): number {return this.m[0][2]}
+  get w(): number {return this.m[0][3]}
+
+  set x(x: number) {this.m[0][0] = x}
+  set y(y: number) {this.m[0][1] = y}
+  set z(z: number) {this.m[0][2] = z}
+  set w(w: number) {this.m[0][3] = w}
 
   static iHat: Vector = new Vector(1)
   static jHat: Vector = new Vector(0, 1)
@@ -73,26 +79,13 @@ class Vector {
   static Dot(a: Matrix, b: Vector): Vector
   static Dot(a: Matrix, b: Matrix): Matrix
   static Dot(a: Vector | Matrix, b: Vector | Matrix): number | Vector | Matrix {
-    if (a instanceof Vector) {
-      if (b instanceof Vector) {
-        return a.x*b.x + a.y*b.y + a.z*b.z
-      } else {
-        return Matrix.Dot(a, b)
-      }
-    } else {
-      if (b instanceof Vector) {
-        return Matrix.Dot(b, a)
-      } else {
-        return Matrix.Dot(a, b)
-      }
-    }
+    return Matrix.Dot(a, b)
   }
 
   dot(a: Vector): number
   dot(a: Matrix): Vector
   dot(a: Vector | Matrix): number | Vector {
-    if (a instanceof Vector) return Vector.Dot(this, a)
-    else return Matrix.Dot(this, a)
+    return Vector.Dot(this, a)
   }
 
   static Div(a: Vector, b: number): Vector {
@@ -212,5 +205,13 @@ class Vector {
 
   getMidpoint(v: Vector): Vector {
     return Vector.GetMidpoint(this, v)
+  }
+
+  static ToMatrix(v: Vector): Matrix {
+    return Matrix.FromArr([v.x, v.y, v.z, v.w])
+  }
+
+  toMatrix(): Matrix {
+    return Vector.ToMatrix(this)
   }
 }

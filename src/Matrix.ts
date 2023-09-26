@@ -34,40 +34,59 @@ class Matrix {
     return Matrix.Map(this.copy(), fn)
   }
 
+  static Dot(a: Vector, b: Vector): number
   static Dot(a: Vector, b: Matrix): Vector
   static Dot(a: Matrix, b: Vector): Vector
   static Dot(a: Matrix, b: Matrix): Matrix
-  static Dot(a: Vector, b: Vector): number
   static Dot(a: Vector | Matrix, b: Vector | Matrix): Vector | Matrix | number {
-    if (a instanceof Matrix) {
-      if (b instanceof Matrix) {
+    if (a instanceof Vector) {
+      if (b instanceof Vector) {
+        return a.x*b.x + a.y*b.y + a.z*b.z
+      } else {
+        return a.toMatrix().dot(b).toVector()
+      }
+    } else {
+      if (b instanceof Vector) {
+        return b.toMatrix().dot(a).toVector()
+      } else {
         return Matrix.Map(new Matrix(a.r, b.c), (e,i,j) => {
           let s = 0
           for (let k=0; k<a.c; k++) s += a.m[i][k] * b.m[k][j]
           return s
         })
-      } else {
-        return Matrix.Dot(b, a)
-      }
-    } else {
-      if (b instanceof Matrix) {
-        let n: Matrix = new Matrix(1, 4)
-        n.m[0][0] = a.x
-        n.m[0][1] = a.y
-        n.m[0][2] = a.z
-        n.m[0][3] = a.w
-        return Matrix.Dot(n, b).toVector()
-      } else {
-        return Vector.Dot(a, b)
       }
     }
+
+
+    // if (a instanceof Matrix) {
+    //   if (b instanceof Matrix) {
+    //     return Matrix.Map(new Matrix(a.r, b.c), (e,i,j) => {
+    //       let s = 0
+    //       for (let k=0; k<a.c; k++) s += a.m[i][k] * b.m[k][j]
+    //       return s
+    //     })
+    //   } else {
+    //     return Matrix.Dot(b, a)
+    //   }
+    // } else {
+    //   if (b instanceof Matrix) {
+    //     let n: Matrix = new Matrix(1, 4)
+    //     n.m[0][0] = a.x
+    //     n.m[0][1] = a.y
+    //     n.m[0][2] = a.z
+    //     n.m[0][3] = a.w
+    //     return Matrix.Dot(n, b).toVector()
+    //   } else {
+    //     return Vector.Dot(a, b)
+    //   }
+    // }
   }
 
-  dot(a: Matrix): Matrix
   dot(a: Vector): Vector
-  dot(a: Matrix | Vector): Matrix | Vector {
-    if (a instanceof Matrix) return Matrix.Dot(this, a)
-    else return Matrix.Dot(a, this)
+  dot(a: Matrix): Matrix
+  dot(a: Vector | Matrix): Matrix | Vector {
+    if (a instanceof Vector) return Matrix.Dot(a, this).toVector()
+    return Matrix.Dot(this, a)
   }
 
   static ToVector(m: Matrix): Vector {
@@ -99,7 +118,7 @@ class Matrix {
   }
 
   static MakeProjectionMatrix(a: Wrapper, fov: number = 90, near: number = 0.1, far: number = 1000): Matrix {
-    let m = new Matrix()
+    let m: Matrix = new Matrix()
     let asp: number = a.height / a.width
     let rad: number = 1 / Math.tan(fov/360*Math.PI)
     let q: number = far / (far - near)
@@ -126,8 +145,8 @@ class Matrix {
   static #MakeRotation(axis: keyof typeof RotationAxis, theta: number = 0): Matrix {
     let m = Matrix.MakeIdentity()
     if (theta != 0) {
-      let cos = Math.cos(theta)
-      let sin = Math.sin(theta)
+      let cos: number = Math.cos(theta)
+      let sin: number = Math.sin(theta)
       let a: number = axis == 'x' ? 1 : 0
       let b: number = axis == 'z' ? 1 : 2
       m.m[a][a] = cos
