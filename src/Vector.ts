@@ -214,4 +214,12 @@ class Vector extends Matrix {
   toMatrix(): Matrix {
     return Vector.ToMatrix(this)
   }
+
+  static IsEqual(a: Vector, b: Vector, p: number = 0.001): boolean {
+    return a.sub(b).mag() <= p
+  }
+
+  equals(v: Vector, p: number = 0.001): boolean {
+    return Vector.IsEqual(this, v, p)
+  }
 }

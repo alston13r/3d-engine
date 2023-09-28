@@ -142,4 +142,12 @@ class Triangle {
   static FromArr(i: number, j: number, k: number, arr: Vector[]): Triangle {
     return new Triangle(arr[i].copy(), arr[j].copy(), arr[k].copy())
   }
+
+  static IsEqual(a: Triangle, b: Triangle, p: number = 0.001): boolean {
+    return a.p1.equals(b.p1, p) && a.p2.equals(b.p2, p) && a.p3.equals(b.p3, p)
+  }
+
+  equals(t: Triangle, p: number = 0.001): boolean {
+    return Triangle.IsEqual(this, t, p)
+  }
 }
