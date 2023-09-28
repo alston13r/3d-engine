@@ -147,8 +147,9 @@ class RectangularPrism extends SpatialMeshable {
     let f = new Vector(xLength, yLength, zLength)
     let g = new Vector(0,       yLength, zLength)
     let h = new Vector(0,       0,       zLength)
+    let vertecies: Vector[] = [a,b,c,d,e,f,g,h]
     super(pos, orientation, new Mesh([
-      new Triangle(a.copy(), b.copy(), c.copy()),
+      new Triangle(0,1,2,vertecies),
       new Triangle(a.copy(), c.copy(), d.copy()),
       new Triangle(d.copy(), c.copy(), f.copy()),
       new Triangle(d.copy(), f.copy(), e.copy()),

@@ -1,7 +1,10 @@
-class Mesh {
+interface Mesh {
   tris: Triangle[]
-  midPoint: Vector
+  vertecies: Vector[]
+  midpoint: Vector
+}
 
+class Mesh {
   constructor(tris: Triangle[] = []) {
     this.tris = tris
     if (tris.length > 0) {
@@ -21,15 +24,15 @@ class Mesh {
           if (p.z > maxZ) maxZ = p.z
         }
       }
-      this.midPoint = new Vector((minX+maxX)/2, (minY+maxY)/2, (minZ+maxZ)/2)
+      this.midpoint = new Vector((minX+maxX)/2, (minY+maxY)/2, (minZ+maxZ)/2)
     } else {
-      this.midPoint = new Vector()
+      this.midpoint = new Vector()
     }
-    if (this.midPoint.x != 0 || this.midPoint.y != 0 || this.midPoint.z != 0) {
+    if (this.midpoint.x != 0 || this.midpoint.y != 0 || this.midpoint.z != 0) {
       for (let t of this.tris) {
-        Triangle.Translate(t, this.midPoint.scale(-1))
+        Triangle.Translate(t, this.midpoint.scale(-1))
       }
-      this.midPoint = new Vector()
+      this.midpoint = new Vector()
     }
   }
 }
