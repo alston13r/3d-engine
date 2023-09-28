@@ -1,0 +1,1 @@
+optimize memory usage by making triangles reference vectors for meshes so each triangle doesn't have a unique vector vertex :/
