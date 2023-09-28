@@ -148,6 +148,6 @@ class Triangle {
   }
 
   equals(t: Triangle, p: number = 0.001): boolean {
-    return Triangle.IsEqual(this, t, p)
+    return Triangle.IsEqual(this, t, p) // hi
   }
 }
