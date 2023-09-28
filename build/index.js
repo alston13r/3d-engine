@@ -1,7 +1,6 @@
 "use strict";
 const scene = new Scene();
 const cube = new Cube(new Vector(0, 0, 5));
-// const sphere: Icosphere = new Icosphere(new Vector(2, 0, 5), 2, 2)
 let keyMap = new Map();
 function checkKey(k) {
     if (keyMap.has(k)) {
@@ -10,7 +9,6 @@ function checkKey(k) {
     return false;
 }
 scene.addObject(cube);
-// scene.addObject(sphere)
 scene.addLight(new Light());
 function draw(t) {
     scene.bg();
