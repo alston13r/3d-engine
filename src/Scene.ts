@@ -103,6 +103,9 @@ class Scene {
 
   render(): void {
     this.bg()
+    
+    if (this.objects.length == 0) return
+
     let matView: Matrix = this.camera.makeMatView()
     let raster: Triangle[] = []
 
