@@ -120,6 +120,12 @@ class Triangle {
     static FromArr(i, j, k, arr) {
         return new Triangle(arr[i].copy(), arr[j].copy(), arr[k].copy());
     }
+    static IsEqual(a, b, p = 0.001) {
+        return a.p1.equals(b.p1, p) && a.p2.equals(b.p2, p) && a.p3.equals(b.p3, p);
+    }
+    equals(t, p = 0.001) {
+        return Triangle.IsEqual(this, t, p);
+    }
 }
 Triangle.GetMidpointX = (t) => Triangle.GetMidpoint(t).x;
 Triangle.GetMidpointY = (t) => Triangle.GetMidpoint(t).y;

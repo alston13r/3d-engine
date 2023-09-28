@@ -172,6 +172,12 @@ class Vector extends Matrix {
     toMatrix() {
         return Vector.ToMatrix(this);
     }
+    static IsEqual(a, b, p = 0.001) {
+        return a.sub(b).mag() <= p;
+    }
+    equals(v, p = 0.001) {
+        return Vector.IsEqual(this, v, p);
+    }
 }
 Vector.iHat = new Vector(1);
 Vector.jHat = new Vector(0, 1);

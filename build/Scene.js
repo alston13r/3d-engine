@@ -86,6 +86,8 @@ class Scene {
     }
     render() {
         this.bg();
+        if (this.objects.length == 0)
+            return;
         let matView = this.camera.makeMatView();
         let raster = [];
         for (let obj of this.objects) {

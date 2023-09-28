@@ -77,9 +77,29 @@ _SpatialObject_instances = new WeakSet(), _SpatialObject_popWorldMatrix = functi
     this.worldMatrix.m[3][2] = this.pos.z;
 };
 class SpatialMeshable extends SpatialObject {
-    constructor(pos = new Vector(), orientation = new OrientationMatrix(), mesh) {
+    constructor(pos = new Vector(), orientation = new OrientationMatrix(), mesh = new Mesh()) {
         super(pos, orientation);
         this.mesh = mesh;
+    }
+    static Copy(obj) {
+        let tObj = new SpatialMeshable();
+        tObj.pos = obj.pos.copy();
+        tObj.orientation = OrientationMatrix.Copy(tObj.orientation);
+        tObj.mesh.tris = obj.mesh.tris.map((t) => t.copy());
+        return tObj;
+    }
+    copy() {
+        return SpatialMeshable.Copy(this);
+    }
+    static Add(obj1, obj2) {
+        let v = obj2.pos.sub(obj1.pos);
+        for (let t of obj2.mesh.tris) {
+            obj1.mesh.tris.push(t.translate(v));
+        }
+        return obj1;
+    }
+    add(obj) {
+        return SpatialMeshable.Add(this.copy(), obj);
     }
 }
 class RectangularPrism extends SpatialMeshable {

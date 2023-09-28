@@ -16,6 +16,9 @@ class OrientationMatrix extends Matrix {
         this.right = this.up.cross(this.forward);
         __classPrivateFieldGet(this, _OrientationMatrix_instances, "m", _OrientationMatrix_popMat).call(this);
     }
+    static Copy(mat) {
+        return new OrientationMatrix(mat.forward.copy(), mat.up.copy());
+    }
     rotateAround(axis, t) {
         Vector.RotateAround(this.forward, axis, t);
         Vector.RotateAround(this.up, axis, t);

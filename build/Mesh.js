@@ -1,6 +1,6 @@
 "use strict";
 class Mesh {
-    constructor(tris) {
+    constructor(tris = []) {
         this.tris = tris;
         if (tris.length > 0) {
             let minX = tris[0].p[0].x;
