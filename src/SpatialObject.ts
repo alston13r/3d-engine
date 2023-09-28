@@ -107,9 +107,33 @@ class SpatialObject implements LookableI {
 interface SpatialMeshable extends SpatialObject, MeshableI {}
 
 class SpatialMeshable extends SpatialObject {
-  constructor(pos: Vector = new Vector(), orientation: OrientationMatrix = new OrientationMatrix(), mesh: Mesh) {
+  constructor(pos: Vector = new Vector(), orientation: OrientationMatrix = new OrientationMatrix(), mesh: Mesh = new Mesh()) {
     super(pos, orientation)
     this.mesh = mesh
+  }
+
+  static Copy(obj: SpatialMeshable): SpatialMeshable {
+    let tObj: SpatialMeshable = new SpatialMeshable()
+    tObj.pos = obj.pos.copy()
+    tObj.orientation = OrientationMatrix.Copy(tObj.orientation)
+    tObj.mesh.tris = obj.mesh.tris.map((t: Triangle) => t.copy())
+    return tObj
+  }
+
+  copy(): SpatialMeshable {
+    return SpatialMeshable.Copy(this)
+  }
+
+  static Add(obj1: SpatialMeshable, obj2: SpatialMeshable): SpatialMeshable {
+    let v: Vector = obj2.pos.sub(obj1.pos)
+    for (let t of obj2.mesh.tris) {
+      obj1.mesh.tris.push(t.translate(v))
+    }
+    return obj1
+  }
+
+  add(obj: SpatialMeshable): SpatialMeshable {
+    return SpatialMeshable.Add(this.copy(), obj)
   }
 }
 
