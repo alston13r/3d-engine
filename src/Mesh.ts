@@ -2,7 +2,7 @@ class Mesh {
   tris: Triangle[]
   midPoint: Vector
 
-  constructor(tris: Triangle[]) {
+  constructor(tris: Triangle[] = []) {
     this.tris = tris
     if (tris.length > 0) {
       let minX: number = tris[0].p[0].x
