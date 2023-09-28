@@ -12,6 +12,10 @@ class OrientationMatrix extends Matrix {
     this.#popMat()
   }
 
+  static Copy(mat: OrientationMatrix): OrientationMatrix {
+    return new OrientationMatrix(mat.forward.copy(), mat.up.copy())
+  }
+
   rotateAround(axis: Vector, t: number): void {
     Vector.RotateAround(this.forward, axis, t)
     Vector.RotateAround(this.up, axis, t)
