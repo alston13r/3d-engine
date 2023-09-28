@@ -1,6 +1,5 @@
 const scene: Scene = new Scene()
 const cube: Cube = new Cube(new Vector(0, 0, 5))
-// const sphere: Icosphere = new Icosphere(new Vector(2, 0, 5), 2, 2)
 
 let keyMap: Map<string, boolean> = new Map<string, boolean>()
 
@@ -12,7 +11,6 @@ function checkKey(k: string): boolean {
 
 scene.addObject(cube)
 
-// scene.addObject(sphere)
 scene.addLight(new Light())
 
 function draw(t: number): void {
